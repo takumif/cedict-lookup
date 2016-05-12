@@ -1,11 +1,8 @@
 {
   "name": "cedict-lookup",
   "version": "0.0.1",
-  "description": "Look up Chinese words on CC-CEDICT",
-  "main": "cedict.js",
-  "scripts": {
-    "test": "node test.js"
-  },
+  "description": "Look up Chinese words in CC-CEDICT",
+  "main": "src/cedict.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/takumif/cedict-lookup.git"
@@ -20,6 +17,5 @@
   "bugs": {
     "url": "https://github.com/takumif/cedict-lookup/issues"
   },
-  "homepage": "https://github.com/takumif/cedict-lookup#readme",
-  "typings": "cedict.d.ts"
+  "homepage": "https://github.com/takumif/cedict-lookup#readme"
 }
