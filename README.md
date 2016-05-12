@@ -1,7 +1,7 @@
 # cedict-lookup
 https://www.npmjs.com/package/cedict-lookup
 
-A Node.js package for looking up Chines words in [CC-CEDICT](http://www.mdbg.net/chindict/chindict.php?page=cc-cedict)
+A Node.js package for looking up Chinese words in [CC-CEDICT](http://www.mdbg.net/chindict/chindict.php?page=cc-cedict)
 
 ## Usage
 ```javascript
@@ -17,6 +17,12 @@ console.log(
 //     simplified: '你好',
 //     pinyin: 'ni3 hao3',
 //     english: 'Hello!/Hi!/How are you?' } ]
+
+
+console.log(
+    dict.getMatch('找不到的東西')
+);
+// []
 
 
 console.log(
