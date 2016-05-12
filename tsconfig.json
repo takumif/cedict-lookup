@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5"
+    },
+    "files": [
+        "src/cedict.ts",
+        "src/parser.ts",
+        "src/entry.ts"
+    ]
+}
