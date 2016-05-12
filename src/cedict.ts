@@ -9,10 +9,12 @@ import {CedictParser} from "./parser"
  */
 class Cedict {
     private root: CedictNode;
+    private traditional: boolean;
     
-    constructor(filename: string) {
+    constructor(filename: string, trad: boolean) {
         var entries = CedictParser.parse(filename);
         
+        this.traditional = trad;
         this.root = new CedictNode("");
         this.populateTree(entries);
     }
@@ -53,8 +55,9 @@ class Cedict {
     
     private insertEntry(entry: Entry): void {
         var node = this.root;
-        while (node.word != entry.traditional) {
-            var nextChar = entry.traditional[node.word.length];
+        var characters = this.traditional ? entry.traditional : entry.simplified;
+        while (node.word != characters) {
+            var nextChar = characters[node.word.length];
             
             if (node.suffixes[nextChar] === undefined) {
                 // never seen this character sequence before, so make a node for it
@@ -107,6 +110,10 @@ class CedictNode {
     }
 }
 
-export function load(filename: string): Cedict {
-    return new Cedict(filename);
+export function loadTraditional(filename: string): Cedict {
+    return new Cedict(filename, true);
+}
+
+export function loadSimplified(filename: string): Cedict {
+    return new Cedict(filename, false);
 }
