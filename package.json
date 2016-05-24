@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/takumif/cedict-lookup/issues"
   },
-  "homepage": "https://github.com/takumif/cedict-lookup#readme"
+  "homepage": "https://github.com/takumif/cedict-lookup#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typedoc": "^2.0.0",
+    "gulp-typescript": "^2.13.4",
+    "typedoc": "^0.3.12"
+  }
 }
