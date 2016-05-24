@@ -1,7 +1,9 @@
 # cedict-lookup
 https://www.npmjs.com/package/cedict-lookup
 
-A Node.js package for looking up Chinese words in [CC-CEDICT](http://www.mdbg.net/chindict/chindict.php?page=cc-cedict)
+A Node.js package for looking up Chinese words in [CC-CEDICT](http://www.mdbg.net/chindict/chindict.php?page=cc-cedict).
+
+[TypeDoc](http://takumif.github.io/cedict-lookup/docs)
 
 ## Usage
 ```javascript
