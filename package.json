@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/takumif/cedict-lookup#readme",
   "devDependencies": {
+    "@types/node": "^9.6.1",
     "gulp": "^3.9.1",
     "gulp-typedoc": "^2.0.0",
     "gulp-typescript": "^2.13.4",
