@@ -10,32 +10,30 @@ import {CedictParser} from "./parser"
 class Cedict {
     private root: CedictNode;
     private traditional: boolean;
-    
-    constructor(filename: string, trad: boolean) {
-        var entries = CedictParser.parse(filename);
-        
+
+    constructor(entries: Entry[], trad: boolean) {
         this.traditional = trad;
         this.root = new CedictNode("");
         this.populateTree(entries);
     }
-    
+
     getMatch(query: string): Entry[] {
         var node = this.getNodeForWord(query);
         return node != null ? node.entries : [];
     }
-    
+
     getEntriesStartingWith(query: string): Entry[] {
         var node = this.getNodeForWord(query);
         return node != null ? this.gatherEntriesUnderNode(node) : [];
     }
-    
+
     /**
      * E.g. for a query of "我們是" this will return entries for 我 and 我們
      */
     getPrefixEntries(query: string): Entry[] {
         var node = this.root;
         var entries: Entry[] = [];
-        
+
         for (var i = 0; i < query.length; i++) {
             var nextChar = query[i];
             if (node.suffixes[nextChar] === undefined) {
@@ -46,19 +44,19 @@ class Cedict {
         }
         return entries;
     }
-    
+
     private populateTree(entries: Entry[]): void {
         for (var i = 0; i < entries.length; i++) {
             this.insertEntry(entries[i]);
         }
     }
-    
+
     private insertEntry(entry: Entry): void {
         var node = this.root;
         var characters = this.traditional ? entry.traditional : entry.simplified;
         while (node.word != characters) {
             var nextChar = characters[node.word.length];
-            
+
             if (node.suffixes[nextChar] === undefined) {
                 // never seen this character sequence before, so make a node for it
                 node.suffixes[nextChar] = new CedictNode(node.word + nextChar);
@@ -67,21 +65,21 @@ class Cedict {
         }
         node.entries.push(entry);
     }
-    
+
     private gatherEntriesUnderNode(node: CedictNode): Entry[] {
         if (node == null) {
             return [];
         }
         var entries: Entry[] = [];
         Array.prototype.push.apply(entries, node.entries);
-        
+
         // get the entries from all the child nodes
         for (var suffix in node.suffixes) {
             Array.prototype.push.apply(entries, this.gatherEntriesUnderNode(node.suffixes[suffix]));
         }
         return entries;
     }
-    
+
     /**
      * Returns null if the node is not found
      */
@@ -102,7 +100,7 @@ class CedictNode {
     word: string;
     entries: Entry[];
     suffixes: { [id: string]: CedictNode };
-    
+
     constructor(w: string) {
         this.word = w;
         this.entries = [];
@@ -110,10 +108,12 @@ class CedictNode {
     }
 }
 
-export function loadTraditional(filename: string): Cedict {
-    return new Cedict(filename, true);
+export async function loadTraditional(filename: string): Promise<Cedict> {
+    var entries = await CedictParser.parse(filename);
+    return new Cedict(entries, true);
 }
 
-export function loadSimplified(filename: string): Cedict {
-    return new Cedict(filename, false);
+export async function loadSimplified(filename: string): Promise<Cedict> {
+    var entries = await CedictParser.parse(filename);
+    return new Cedict(entries, false);
 }

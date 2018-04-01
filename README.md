@@ -6,10 +6,14 @@ A Node.js package for looking up Chinese words in [CC-CEDICT](http://www.mdbg.ne
 * [TypeDoc](http://takumif.github.io/cedict-lookup/docs)
 
 ## Usage
+This fork depends on Promises being available in your Javascript environment. If it is not, you can polyfill Promises with the [`es6-promise` library](https://github.com/stefanpenner/es6-promise).
+
 ```javascript
-var cedict = require('cedict-lookup');
-var dict = cedict.loadTraditional('path/to/your/cedict_ts.u8');
-// var dict = cedict.loadSimplified('path/to/your/cedict_ts.u8');
+const cedict = require('cedict-lookup');
+cedict.loadTraditional('path/to/your/cedict_ts.u8').then(dict => {
+    // ...
+});
+// cedict.loadSimplified('path/to/your/cedict_ts.u8').then(dict => { ... });
 
 console.log(
     dict.getMatch('你好')
