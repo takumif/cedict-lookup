@@ -23,6 +23,8 @@
     "gulp": "^3.9.1",
     "gulp-typedoc": "^2.0.0",
     "gulp-typescript": "^2.13.4",
-    "typedoc": "^0.3.12"
-  }
+    "typedoc": "^0.3.12",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {}
 }
